@@ -4,12 +4,12 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -24,28 +24,29 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.applicationvault.R
 import com.example.applicationvault.data.AuthViewModel
 
 @Composable
-fun EmployerregistrationScreen(){
-    var jobname by remember { mutableStateOf("") }
-    var requirements by remember { mutableStateOf("") }
-    var deadline by remember { mutableStateOf("") }
-    var companyname by remember { mutableStateOf("") }
+fun EmployeeregisterScreen(navController: NavController){
+    var authViewModel: AuthViewModel = viewModel()
+    var firstname by remember { mutableStateOf("") }
+    var lastname by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
-    var authViewModel: AuthViewModel = viewModel()
+    val passwordVisible by remember { mutableStateOf(false) }
     val context = LocalContext.current
-    Column ( modifier = Modifier.fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally) {
-        Text(
-            text = "Register your available job here!!",
+    Column(modifier = Modifier.wrapContentWidth(), horizontalAlignment = Alignment.CenterHorizontally){
+        Text(text = "Register for available jobs here!!",
             fontSize = 30.sp,
             fontFamily = FontFamily.SansSerif,
             fontStyle = FontStyle.Normal,
@@ -57,84 +58,66 @@ fun EmployerregistrationScreen(){
                 .padding(20.dp)
                 .background(Color.LightGray)
         )
-        Spacer(modifier = Modifier.padding(20.dp))
+        Spacer(modifier = Modifier.padding(10.dp))
         Image(
             painter = painterResource(id = R.drawable.logo),
             contentDescription = "Logo",
             modifier = Modifier
                 .wrapContentWidth()
                 .fillMaxWidth()
-                .height(100.dp)
-        )
-        Spacer(modifier = Modifier.padding(20.dp))
+                .height(100.dp))
+        Spacer(modifier = Modifier.padding(10.dp))
         OutlinedTextField(
-            value = companyname,
-            onValueChange = { newCompanyname -> companyname = newCompanyname },
-            label = { Text(text = "Enter companyname") },
-            placeholder = { Text(text = "Please enter the name of the company") },
+            value = firstname,
+            onValueChange = {newFirstname -> firstname = newFirstname},
+            label = { Text(text = "Enter your first name") },
+            placeholder = { Text(text = "Please enter your first name ") },
             modifier = Modifier
                 .wrapContentWidth()
                 .align(Alignment.CenterHorizontally),
         )
-        Spacer(modifier = Modifier.padding(20.dp))
+        Spacer(modifier = Modifier.padding(10.dp))
         OutlinedTextField(
-            value = jobname,
-            onValueChange = { newJobname -> jobname = newJobname },
-            label = { Text(text = "Enter jobname") },
-            placeholder = { Text(text = "Please enter the available job") },
+            value = lastname,
+            onValueChange = {newLastname -> lastname = newLastname},
+            label = { Text(text = "Enter your last name") },
+            placeholder = { Text(text = "Please enter your last name ") },
             modifier = Modifier
                 .wrapContentWidth()
                 .align(Alignment.CenterHorizontally),
         )
-        Spacer(modifier = Modifier.padding(20.dp))
+        Spacer(modifier = Modifier.padding(10.dp))
         OutlinedTextField(
             value = email,
-            onValueChange = { newEmail -> email = newEmail },
-            label = { Text(text = "Enter email") },
-            placeholder = { Text(text = "Please enter your email") },
+            onValueChange = {newEmail -> email = newEmail},
+            label = { Text(text = "Enter your email") },
+            placeholder = { Text(text = "Please enter your email ") },
             modifier = Modifier
                 .wrapContentWidth()
                 .align(Alignment.CenterHorizontally),
         )
-        Spacer(modifier = Modifier.padding(20.dp))
+        Spacer(modifier = Modifier.padding(10.dp))
         OutlinedTextField(
             value = password,
-            onValueChange = { newPassword -> password = newPassword },
-            label = { Text(text = "Enter password") },
-            placeholder = { Text(text = "Please enter your password") },
+            visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
+            onValueChange = {newPassword -> password = newPassword},
+            label = { Text(text = "Enter your password") },
+            placeholder = { Text(text = "Please enter your password ") },
             modifier = Modifier
                 .wrapContentWidth()
                 .align(Alignment.CenterHorizontally),
         )
+        Button( onClick = {authViewModel.Signup(firstname,lastname,email,password,navController,context)}, modifier = Modifier.
+        wrapContentWidth()
+            .fillMaxWidth()
+            .align(Alignment.CenterHorizontally), colors = ButtonDefaults.buttonColors(Color.Black))
+        { Text(text = "Save") }
 
-        Spacer(modifier = Modifier.padding(20.dp))
-        OutlinedTextField(
-            value = requirements,
-            onValueChange = { newRequirements -> requirements = newRequirements },
-            label = { Text(text = "Enter requirements") },
-            placeholder = { Text(text = "Please enter the job requirements") },
-            modifier = Modifier
-                .wrapContentWidth()
-                .align(Alignment.CenterHorizontally),
-        )
-        Spacer(modifier = Modifier.padding(20.dp))
-        OutlinedTextField(
-            value = deadline,
-            onValueChange = { newDeadline -> deadline = newDeadline },
-            label = { Text(text = "Enter job deadline") },
-            placeholder = { Text(text = "Please enter the application deadline") },
-            modifier = Modifier
-                .wrapContentWidth()
-                .align(Alignment.CenterHorizontally),
-        )
-        Button(onClick = {authViewModel.signup(companyname,jobname,)})
-        { Text(text = "Submit") }
     }
-
 }
 
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
-fun EmployerregistarionScreenPreview(){
-    EmployerregistrationScreen()
+fun EmployeeregisterScreenPreview(){
+    EmployeeregisterScreen(rememberNavController())
 }

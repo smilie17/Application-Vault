@@ -32,7 +32,7 @@ fun SplashScreen(onNavigateToNext:() -> Unit){
 
         )
     {
-        Image(painter = painterResource(id = R.drawable.logo2),
+        Image(painter = painterResource(id = R.drawable.background),
             contentDescription = "Background",
             contentScale = ContentScale.FillBounds
         )

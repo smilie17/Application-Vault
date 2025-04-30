@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "869538312134",
+    "project_id": "applicationvault-cce89",
+    "storage_bucket": "applicationvault-cce89.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:869538312134:android:47fae616402616890f0cc7",
+        "android_client_info": {
+          "package_name": "com.example.applicationvault"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCnTxd9P2RJa8URU279jcJMf1MfnYWcI7Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
