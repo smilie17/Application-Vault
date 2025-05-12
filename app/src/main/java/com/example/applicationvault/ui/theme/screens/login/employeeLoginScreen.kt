@@ -1,6 +1,9 @@
 package com.example.applicationvault.ui.theme.screens.login
 
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentWidth
@@ -20,6 +23,9 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -27,12 +33,19 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
+import com.example.applicationvault.R
+import com.example.applicationvault.data.EmployeeViewModel
 
 @Composable
-fun LoginScreen(){
+fun EmployeeLoginScreen(navController: NavController){
     var email by remember { mutableStateOf(value = "") }
     var password by remember { mutableStateOf(value = "") }
     val passwordVisible by remember { mutableStateOf(false) }
+    var employeeViewModel: EmployeeViewModel = viewModel()
+    var context = LocalContext.current
     Column {
         Text(text = "Login Here!!",
             color = Color.Black,
@@ -65,7 +78,7 @@ fun LoginScreen(){
                 .align(Alignment.CenterHorizontally),
             leadingIcon = { Icon(Icons.Default.Lock, contentDescription = "Password Icon") }
         )
-        Button(onClick = {}, modifier = Modifier.wrapContentWidth().align(Alignment.CenterHorizontally), colors = ButtonDefaults.buttonColors(
+        Button(onClick = {employeeViewModel.Login(email,password,navController, context)}, modifier = Modifier.wrapContentWidth().align(Alignment.CenterHorizontally), colors = ButtonDefaults.buttonColors(
             Color.Blue)) { Text(text = "Login") }
     }
 
@@ -74,5 +87,5 @@ fun LoginScreen(){
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun LoginScreenPreview(){
-    LoginScreen()
+    EmployeeLoginScreen(rememberNavController())
 }

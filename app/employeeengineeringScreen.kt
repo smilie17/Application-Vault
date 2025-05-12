@@ -1,4 +1,4 @@
-package com.example.applicationvault.ui.theme.screens.teaching
+package com.example.applicationvault.ui.theme.screens.healthscreens
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.wrapContentWidth
@@ -13,9 +13,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.applicationvault.ui.theme.screens.it.EmployeeItScreen
 
 @Composable
-fun EmployeeTeachingScreen(){
+fun EmployeeHealthScreen(){
     var firstname by remember { mutableStateOf("") }
     var lastname by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
@@ -65,4 +66,3 @@ fun EmployeeTeachingScreen(){
     }
 
 }
-

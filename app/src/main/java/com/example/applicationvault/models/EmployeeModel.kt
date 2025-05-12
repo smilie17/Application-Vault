@@ -6,4 +6,5 @@ data class EmployeeModel(
     var email: String = "",
     var password: String = "",
     var employeeid: String = "",
+    var imageUrl: String = "",
 )

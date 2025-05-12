@@ -20,6 +20,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.example.applicationvault.navigation.ROUTE_EMPLOYEE_REGISTER
 import com.example.applicationvault.navigation.ROUTE_EMPLOYER_REGISTER
 import com.example.applicationvault.navigation.ROUTE_REGISTER
 
@@ -45,7 +46,8 @@ fun RegisterScreen (navController: NavController){
             }
         Spacer(modifier = Modifier.padding(50.dp))
         Card(
-            modifier = Modifier.padding(10.dp),
+            modifier = Modifier.padding(10.dp).clickable { navController.navigate(
+                ROUTE_EMPLOYEE_REGISTER) },
             shape = RoundedCornerShape(50.dp),
             elevation = CardDefaults.cardElevation(10.dp),
             colors = CardDefaults.cardColors(Color.White)

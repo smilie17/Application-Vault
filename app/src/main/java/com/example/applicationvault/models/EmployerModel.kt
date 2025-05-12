@@ -7,5 +7,6 @@ data class EmployerModel(
     var password: String = "",
     var requirements: String = "",
     var deadline: String = "",
-    var employerid: String = ""
+    var employerid: String = "",
+    var imageUrl: String ="",
 )
